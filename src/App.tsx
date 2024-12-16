@@ -1,35 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { CustomerTable } from "./components/customer-table";
+import { useCustomerData } from "./hooks/use-customer-data";
 
-function App() {
-  const [count, setCount] = useState(0)
+export function App() {
+  const { data, loading } = useCustomerData();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="bg-[#F7F9FC] px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+      <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div className="overflow-hidden shadow ring-1 ring-black/5 sm:rounded-lg">
+          <CustomerTable data={data} isLoading={loading} pagination />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
-
-export default App
